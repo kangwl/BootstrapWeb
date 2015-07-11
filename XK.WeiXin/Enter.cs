@@ -54,31 +54,18 @@ namespace XK.WeiXin {
         private bool CheckSignature() {
 
             string signature = Request.QueryString["signature"];
-
             string timestamp = Request.QueryString["timestamp"];
-
             string nonce = Request.QueryString["nonce"];
 
             string[] ArrTmp = { Token, timestamp, nonce };
-
             Array.Sort(ArrTmp);     //字典排序
 
             string tmpStr = string.Join("", ArrTmp);
-
             tmpStr = FormsAuthentication.HashPasswordForStoringInConfigFile(tmpStr, "SHA1");
 
-            if (tmpStr != null) {
-                tmpStr = tmpStr.ToLower();
-
-                if (tmpStr == signature) {
-
-                    return true;
-
-                }
-
-                return false;
-            }
-            return false;
+            if (tmpStr == null) return false;
+            tmpStr = tmpStr.ToLower();
+            return (tmpStr == signature);
         }
  
         /// <summary>
