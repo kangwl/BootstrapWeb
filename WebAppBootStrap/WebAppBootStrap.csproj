@@ -86,6 +86,10 @@
     <Content Include="App_Data\Bootstrap_log.ldf">
       <DependentUpon>Bootstrap.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\TestWebDB.mdf" />
+    <Content Include="App_Data\TestWebDB_log.ldf">
+      <DependentUpon>TestWebDB.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap\datepicker\css\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap\datepicker\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap\datepicker\css\bootstrap-datepicker.standalone.css" />
