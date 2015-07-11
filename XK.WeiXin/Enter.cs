@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Security;
+using XK.Common;
 using XK.WeiXin.Core;
 
 namespace XK.WeiXin {
@@ -91,6 +92,8 @@ namespace XK.WeiXin {
 
                 Core.Messages messages = new Messages();
                 string resMsg = messages.GetResponseMsg(xmStream);
+                Log log=new Log();
+                log.WriteLog(resMsg);
                 Response.Write(resMsg);
                 Response.End();
             }
