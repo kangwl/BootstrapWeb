@@ -34,7 +34,7 @@ namespace XK.Common {
        /// <summary>
        /// DateTime转换成Unix时间戳(转换失败返回 0)
        /// </summary>
-       public static long GetTimeStamp(DateTime dt) {
+       public static long GetDateTimeStamp(DateTime dt) {
            long epoch;
            try {
                epoch = (dt.ToUniversalTime().Ticks - 621355968000000000)/10000000;

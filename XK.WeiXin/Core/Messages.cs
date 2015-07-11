@@ -32,9 +32,14 @@ namespace XK.WeiXin.Core {
        
             IMessage<Message.Text.MessageModel> textMessage = new Text();
             Text.MessageModel messageModel = textMessage.GetMessage(xmlStream);
+            string fromUser = messageModel.FromUserName;
+            string toUser = messageModel.ToUserName;
             //logic
             string retText = Logic.TextMessage.ReturnMessage(messageModel);
             messageModel.Content = retText;
+            messageModel.ToUserName = fromUser;
+            messageModel.FromUserName = toUser;
+            messageModel.CreateTime = Common.TimeConvert.GetDateTimeStamp(DateTime.Now);
             string txtMsg = textMessage.InitSendMessage(messageModel);
 
             return txtMsg;
