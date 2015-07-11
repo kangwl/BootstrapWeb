@@ -1,0 +1,9 @@
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\bin\Debug\XK.Bll.dll
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\bin\Debug\XK.Bll.pdb
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\obj\Debug\XK.Bll.dll
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\obj\Debug\XK.Bll.pdb
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\obj\Debug\XK.Bll.csprojResolveAssemblyReference.cache
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\bin\Debug\XK.Dal.dll
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\bin\Debug\XK.IDal.dll
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\bin\Debug\XK.Dal.pdb
+E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Bll\bin\Debug\XK.IDal.pdb
