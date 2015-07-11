@@ -367,7 +367,9 @@
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
     <Content Include="View\User\List.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\Account.ashx.cs">

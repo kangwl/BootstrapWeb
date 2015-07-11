@@ -13,6 +13,10 @@ namespace XK.Bll
 
         private static readonly IDal.IUser userDal = new User_Dal();
 
+        public static bool CreateTable() {
+            return userDal.CreateTable();
+        }
+
         /// <summary>
         /// 检查登录
         /// </summary>

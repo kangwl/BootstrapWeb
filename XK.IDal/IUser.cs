@@ -15,5 +15,6 @@ namespace XK.IDal
         DataTable GetOne(string where);
         bool Exist(string where);
         DataTable ExistModel(string where,out bool exist);
+        bool CreateTable();
     }
 }
