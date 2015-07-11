@@ -1,9 +1,0 @@
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\bin\Debug\XK.Authentication.dll
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\bin\Debug\XK.Authentication.pdb
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\bin\Debug\XK.Common.dll
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\bin\Debug\Newtonsoft.Json.dll
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\bin\Debug\XK.Common.pdb
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\bin\Debug\Newtonsoft.Json.xml
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\obj\Debug\XK.Authentication.csprojResolveAssemblyReference.cache
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\obj\Debug\XK.Authentication.dll
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.Authentication\obj\Debug\XK.Authentication.pdb

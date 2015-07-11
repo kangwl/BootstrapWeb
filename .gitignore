@@ -1,0 +1,17 @@
+/XK.IDal/obj
+/XK.Dal/obj
+/XK.Core/obj
+/XK.Common/obj
+/XK.Bll/obj
+/XK.Authentication/obj
+/WebAppBootStrap/obj
+/ConsoleAppTest/obj
+/ConsoleAppTest/bin
+/WebAppBootStrap/bin
+/XK.Authentication/bin
+/XK.Bll/bin
+/XK.Common/bin
+/XK.Core/bin
+/XK.Dal/bin
+/XK.IDal/bin
+/MyBootstrapWeb.v12.suo

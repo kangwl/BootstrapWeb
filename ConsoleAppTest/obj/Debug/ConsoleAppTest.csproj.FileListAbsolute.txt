@@ -1,5 +1,0 @@
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\ConsoleAppTest\bin\Debug\ConsoleAppTest.exe
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\ConsoleAppTest\bin\Debug\ConsoleAppTest.pdb
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\ConsoleAppTest\obj\Debug\ConsoleAppTest.csprojResolveAssemblyReference.cache
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\ConsoleAppTest\obj\Debug\ConsoleAppTest.exe
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\ConsoleAppTest\obj\Debug\ConsoleAppTest.pdb

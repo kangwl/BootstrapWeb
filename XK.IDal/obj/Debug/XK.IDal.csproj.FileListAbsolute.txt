@@ -1,5 +1,0 @@
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.IDal\bin\Debug\XK.IDal.dll
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.IDal\bin\Debug\XK.IDal.pdb
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.IDal\obj\Debug\XK.IDal.csprojResolveAssemblyReference.cache
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.IDal\obj\Debug\XK.IDal.dll
-E:\MyDocument\Docs\SVN\BootstrapWeb\trunk\XK.IDal\obj\Debug\XK.IDal.pdb
