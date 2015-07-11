@@ -13,6 +13,7 @@ namespace WebAppBootStrap.Account {
 
             int count = User_Bll.GetRecordCount();
             Response.Write(count);
+            //test
             //if (LoginLogic.HasLogin) {
             //    Response.Redirect(LoginLogic.DefaultUrl);
             //}
