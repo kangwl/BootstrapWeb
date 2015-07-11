@@ -39,6 +39,8 @@ namespace WebAppBootStrap.AppStart {
             bundleCollection.Add(new ScriptBundle("~/bs_table_js").Include("~/Content/bootstrap/table/dist/bootstrap-table.js", 
                         "~/Content/bootstrap/table/dist/locale/bootstrap-table-zh-CN.js"));
 
+            BundleTable.EnableOptimizations = true;
+
         }
 
 

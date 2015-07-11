@@ -82,14 +82,6 @@
     <Content Include="Account\_Login.html" />
     <Content Include="Account\Logout.aspx" />
     <Content Include="Account\Register.aspx" />
-    <Content Include="App_Data\Bootstrap.mdf" />
-    <Content Include="App_Data\Bootstrap_log.ldf">
-      <DependentUpon>Bootstrap.mdf</DependentUpon>
-    </Content>
-    <Content Include="App_Data\TestWebDB.mdf" />
-    <Content Include="App_Data\TestWebDB_log.ldf">
-      <DependentUpon>TestWebDB.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap\datepicker\css\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap\datepicker\css\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap\datepicker\css\bootstrap-datepicker.standalone.css" />
@@ -559,7 +551,9 @@
       <Name>XK.Core</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

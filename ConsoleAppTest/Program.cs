@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
 namespace ConsoleAppTest {
     class Program {
-        static void Main(string[] args) {
-            TestM testM = new TestM();
-            Console.WriteLine(testM.GetName("2"));
-            Console.Read();
+        private static void Main(string[] args) {
+            //TestM testM = new TestM();
+            //Console.WriteLine(testM.GetName("2"));
+            //Console.Read();
         }
-
-
+      
     }
 
     public class TestM {
