@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Security;
+using XK.WeiXin.Core;
 
 namespace XK.WeiXin {
     public class Enter {
@@ -38,19 +39,12 @@ namespace XK.WeiXin {
         private HttpResponse Response { get; set; }
 
         /// <summary>
-
         /// 验证微信签名
-
         /// </summary>
-
         /// * 将token、timestamp、nonce三个参数进行字典序排序
-
         /// * 将三个参数字符串拼接成一个字符串进行sha1加密
-
         /// * 开发者获得加密后的字符串可与signature对比，标识该请求来源于微信。
-
         /// <returns></returns>
-
         private bool CheckSignature() {
 
             string signature = Request.QueryString["signature"];
@@ -93,20 +87,13 @@ namespace XK.WeiXin {
         /// </summary>
         private void ResponsePostMessage() {
            // response message;
-            using (System.IO.Stream s = Request.InputStream) {
-                byte[] b = new byte[s.Length];
-                s.Read(b, 0, (int) s.Length);
-                string postStr = System.Text.Encoding.UTF8.GetString(b);
-                if (!string.IsNullOrEmpty(postStr)) {
+            using (System.IO.Stream xmStream = Request.InputStream) {
 
-                    //ResponseMsg(postStr);
-
-                    // Response.Write(ResponseMsg(postStr));
-                    Response.Write(1);
-                    Response.End();
-                }
+                Core.Messages messages = new Messages();
+                string resMsg = messages.GetResponseMsg(xmStream);
+                Response.Write(resMsg);
+                Response.End();
             }
-
 
         }
     }

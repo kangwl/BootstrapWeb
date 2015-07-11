@@ -85,6 +85,7 @@
     <Compile Include="web\HttpHelper.cs" />
     <Compile Include="web\HttpWebHelper.cs" />
     <Compile Include="web\WebMethods.cs" />
+    <Compile Include="XmlHelper.cs" />
     <Compile Include="ZipObject.cs" />
   </ItemGroup>
   <ItemGroup>

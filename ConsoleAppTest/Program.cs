@@ -4,13 +4,28 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Xml;
 
 namespace ConsoleAppTest {
     class Program {
         private static void Main(string[] args) {
-            TestM testM = new TestM();
-            Console.WriteLine(testM.GetResult("3"));
-            Console.WriteLine(testM.GetResultBridge("3"));
+            //TestM testM = new TestM();
+            //Console.WriteLine(testM.GetResult("3"));
+            //Console.WriteLine(testM.GetResultBridge("3"));
+            //Console.WriteLine("end");
+            //Console.Read();
+
+                 string xmlSend = @"<xml>
+                            <ToUserName><![CDATA[123]]></ToUserName>
+                            <FromUserName><![CDATA[2]]></FromUserName>
+                            <CreateTime>123</CreateTime>
+                            <MsgType><![CDATA[text]]></MsgType>
+                            <Content><![CDATA[333]]></Content>
+                            </xml>";
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(xmlSend);
+            string a = XK.Common.XmlHelper.GetXmlNodeTextByXpath(xmldoc, "//ToUserName");
+            Console.WriteLine(a);
             Console.WriteLine("end");
             Console.Read();
         }
