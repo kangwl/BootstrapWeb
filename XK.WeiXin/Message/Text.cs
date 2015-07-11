@@ -25,16 +25,15 @@ namespace XK.WeiXin.Message {
         /// <summary>
         /// 获取用户发过来的消息
         /// </summary>
-        /// <param name="xmlStream"></param>
+        /// <param name="xmlDoc"></param>
         /// <returns></returns>
-        MessageModel IMessage<MessageModel>.GetMessage(Stream xmlStream) {
-            XmlDocument xmlDocument = Common.XmlHelper.GetXmlDoc(xmlStream);
+        MessageModel IMessage<MessageModel>.GetMessage(XmlDocument xmlDoc) {
             MessageModel messageModel = new MessageModel();
-            messageModel.ToUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDocument, "//ToUserName");
-            messageModel.Content = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDocument, "//Content");
-            messageModel.CreateTime = long.Parse(Common.XmlHelper.GetXmlNodeTextByXpath(xmlDocument, "//CreateTime"));
-            messageModel.FromUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDocument, "//FromUserName");
-            messageModel.MsgId = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDocument, "//MsgId");
+            messageModel.ToUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//ToUserName");
+            messageModel.Content = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//Content");
+            messageModel.CreateTime = long.Parse(Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//CreateTime"));
+            messageModel.FromUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//FromUserName");
+            messageModel.MsgId = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MsgId");
             return messageModel;
         }
 
