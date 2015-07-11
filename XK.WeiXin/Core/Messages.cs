@@ -37,8 +37,8 @@ namespace XK.WeiXin.Core {
             //logic
             string retText = Logic.TextMessage.ReturnMessage(messageModel);
             messageModel.Content = retText;
-            messageModel.ToUserName = fromUser;
-            messageModel.FromUserName = toUser;
+            messageModel.ToUserName = toUser;
+            messageModel.FromUserName = fromUser;
             messageModel.CreateTime = Common.TimeConvert.GetDateTimeStamp(DateTime.Now);
             string txtMsg = textMessage.InitSendMessage(messageModel);
 
