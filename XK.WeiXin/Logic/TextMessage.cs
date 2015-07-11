@@ -10,6 +10,9 @@ namespace XK.WeiXin.Logic {
             if (messageModel.Content.Length < 5) {
                 retText = "字数太少";
             }
+            else {
+                retText = messageModel.Content;
+            }
             return retText;
         }
     }

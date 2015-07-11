@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using XK.WeiXin.Message.MessageInterface;
 
 namespace XK.WeiXin.Message {
     public class Text:IMessage<Text.MessageModel> {
@@ -58,7 +59,7 @@ namespace XK.WeiXin.Message {
                             </xml>";
 
 
-        public class MessageModel:MessageModelBase {
+        public class MessageModel {
 
             /// <summary>
             /// 开发者微信号

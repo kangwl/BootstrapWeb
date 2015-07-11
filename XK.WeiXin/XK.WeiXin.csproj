@@ -49,9 +49,10 @@
     <Compile Include="Core\Messages.cs" />
     <Compile Include="Core\MessageTypeEnum.cs" />
     <Compile Include="Enter.cs" />
+    <Compile Include="Logic\ImageMessage.cs" />
     <Compile Include="Logic\TextMessage.cs" />
-    <Compile Include="Message\IMessage.cs" />
-    <Compile Include="Message\MessageModelBase.cs" />
+    <Compile Include="Message\Image.cs" />
+    <Compile Include="Message\MessageInterface\IMessage.cs" />
     <Compile Include="Message\Text.cs" />
     <Compile Include="MsgBackCode\ErrorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

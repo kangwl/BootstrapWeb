@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using XK.WeiXin.Message;
+using XK.WeiXin.Message.MessageInterface;
 
 namespace XK.WeiXin.Core {
     public class Messages {
@@ -29,16 +29,12 @@ namespace XK.WeiXin.Core {
         }
 
         private string ResponseTextMsg(XmlDocument xmlDoc) {
-       
-            IMessage<Message.Text.MessageModel> textMessage = new Text();
-            Text.MessageModel messageModel = textMessage.GetMessage(xmlDoc);
-            string fromUser = messageModel.FromUserName;
-            string toUser = messageModel.ToUserName;
+
+            IMessage<Message.Text.MessageModel> textMessage = new Message.Text();
+            Message.Text.MessageModel messageModel = textMessage.GetMessage(xmlDoc);
             //logic
             string retText = Logic.TextMessage.ReturnMessage(messageModel);
             messageModel.Content = retText;
-            messageModel.ToUserName = toUser;
-            messageModel.FromUserName = fromUser;
             messageModel.CreateTime = Common.TimeConvert.GetDateTimeStamp(DateTime.Now);
             string txtMsg = textMessage.InitSendMessage(messageModel);
 
@@ -46,7 +42,13 @@ namespace XK.WeiXin.Core {
         }
 
         private string ResponseImageMsg(XmlDocument xmlDoc) {
-            return "";
+            IMessage<Message.Image.MessageModel> imageMessage = new Message.Image();
+            Message.Image.MessageModel messageModel = imageMessage.GetMessage(xmlDoc);
+            string picUrl = Logic.ImageMessage.ReturnMessage(messageModel);
+            messageModel.PicUrl = picUrl;
+            messageModel.CreateTime = Common.TimeConvert.GetDateTimeStamp(DateTime.Now);
+            string imgMsg = imageMessage.InitSendMessage(messageModel);
+            return imgMsg;
         }
     }
 }
