@@ -8,25 +8,79 @@ using System.Text;
 namespace ConsoleAppTest {
     class Program {
         private static void Main(string[] args) {
-            //TestM testM = new TestM();
-            //Console.WriteLine(testM.GetName("2"));
-            //Console.Read();
+            TestM testM = new TestM();
+            Console.WriteLine(testM.GetResult("3"));
+            Console.WriteLine(testM.GetResultBridge("3"));
+            Console.WriteLine("end");
+            Console.Read();
         }
       
     }
 
     public class TestM {
-        public string GetName(string act) {
+
+        #region 普通 if else 逻辑判断
+
+        /// <summary>
+        /// 普通 if else
+        /// </summary>
+        /// <param name="act"></param>
+        /// <returns></returns>
+        public string GetResult(string act) {
             if (act == "1") {
-                return "n1";
+                return n1();
             }
             else if (act == "2") {
-                return "n2";
+                return n2();
             }
             else if (act == "3") {
-                return "n3";
+                return n3();
             }
             return "unknow";
         }
+
+        #endregion
+
+
+        #region 不用 if else 用委托进行逻辑判断（免除大量的 if else 分支判断）
+
+        private readonly Dictionary<string, Func<string>> dicFunc = new Dictionary<string, Func<string>>();
+
+        public TestM() {
+            dicFunc.Add("1", n1);
+            dicFunc.Add("2", n2);
+            dicFunc.Add("3", n3);
+        }
+
+        public string GetResultBridge(string num) {
+            Func<string> methodFunc;
+            //bool has = dicFunc.TryGetValue(num, out methodFunc);
+            //if (!has) {
+            //    return "unknow";
+            //}
+            methodFunc = dicFunc.FirstOrDefault(d => d.Key == num).Value;
+            if (methodFunc == null) {
+                return "unknow";
+            }
+            string res = methodFunc();
+            return res;
+        } 
+
+        #endregion
+
+
+        private string n1() {
+            return "n1";
+        }
+
+        private string n2() {
+            return "n2";
+        }
+
+        private string n3() {
+            return "n3";
+        }
+
     }
+ 
 }
