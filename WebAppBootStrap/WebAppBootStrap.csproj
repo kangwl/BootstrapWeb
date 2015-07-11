@@ -362,6 +362,7 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="weixin\Index.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\Account.ashx.cs">
@@ -498,6 +499,13 @@
     <Compile Include="View\User\List.aspx.designer.cs">
       <DependentUpon>List.aspx</DependentUpon>
     </Compile>
+    <Compile Include="weixin\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\main\dist\css\bootstrap-theme.css.map" />
@@ -549,6 +557,10 @@
     <ProjectReference Include="..\XK.Core\XK.Core.csproj">
       <Project>{60fe30ec-ee6c-427b-8d89-2571eaf40f1d}</Project>
       <Name>XK.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XK.WeiXin\XK.WeiXin.csproj">
+      <Project>{3a4d0520-091c-4d9c-8094-c2c4725f1186}</Project>
+      <Name>XK.WeiXin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
