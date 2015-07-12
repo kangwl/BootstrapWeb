@@ -363,6 +363,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="weixin\Index.aspx" />
+    <Content Include="weixin\Stock.aspx" />
+    <Content Include="weixin\stock.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account\Account.ashx.cs">
@@ -505,6 +507,13 @@
     </Compile>
     <Compile Include="weixin\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="weixin\Stock.aspx.cs">
+      <DependentUpon>Stock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="weixin\Stock.aspx.designer.cs">
+      <DependentUpon>Stock.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

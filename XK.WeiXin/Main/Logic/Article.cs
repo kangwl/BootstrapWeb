@@ -6,7 +6,7 @@ using System.Xml;
 using XK.Common;
 
 namespace XK.WeiXin.Main.Logic {
-   public class Article {
+   public class Article:IMessageLogic {
 
        public Article(XmlDocument xmlRecieve) {
            XmlDoc = xmlRecieve;
@@ -15,7 +15,7 @@ namespace XK.WeiXin.Main.Logic {
        /// <summary>
        /// 接收到的消息
        /// </summary>
-       private XmlDocument XmlDoc { get; set; }
+       public XmlDocument XmlDoc { get; set; }
 
           /// <summary>
        /// 逻辑处理后返回给发送者消息
@@ -26,7 +26,7 @@ namespace XK.WeiXin.Main.Logic {
            return msg;
        }
 
-       private string CreateSendMsg() {
+       public string CreateSendMsg() {
            string ToUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//ToUserName");
            string FromUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName");
 

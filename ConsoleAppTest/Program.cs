@@ -5,6 +5,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using XK.Common.web;
 
 namespace ConsoleAppTest {
     class Program {
@@ -15,18 +18,28 @@ namespace ConsoleAppTest {
             //Console.WriteLine("end");
             //Console.Read();
 
-                 string xmlSend = @"<xml>
-                            <ToUserName><![CDATA[123]]></ToUserName>
-                            <FromUserName><![CDATA[2]]></FromUserName>
-                            <CreateTime>123</CreateTime>
-                            <MsgType><![CDATA[text]]></MsgType>
-                            <Content><![CDATA[333]]></Content>
-                            </xml>";
-            XmlDocument xmldoc = new XmlDocument();
-            xmldoc.LoadXml(xmlSend);
-            string a = XK.Common.XmlHelper.GetXmlNodeTextByXpath(xmldoc, "//ToUserName");
-            Console.WriteLine(a);
-            Console.WriteLine("end");
+//                 string xmlSend = @"<xml>
+//                            <ToUserName><![CDATA[123]]></ToUserName>
+//                            <FromUserName><![CDATA[2]]></FromUserName>
+//                            <CreateTime>123</CreateTime>
+//                            <MsgType><![CDATA[text]]></MsgType>
+//                            <Content><![CDATA[333]]></Content>
+//                            </xml>";
+//            XmlDocument xmldoc = new XmlDocument();
+//            xmldoc.LoadXml(xmlSend);
+//            string a = XK.Common.XmlHelper.GetXmlNodeTextByXpath(xmldoc, "//ToUserName");
+//            Console.WriteLine(a);
+//            Console.WriteLine("end");
+//            Console.Read();
+            XK.Common.web.HttpWebHelper webHelper = new HttpWebHelper("http://d.10jqka.com.cn/v2/realhead/hs_600372/last.js");
+            string res = webHelper.GetResponseStr();
+            int firstIndex = res.IndexOf('{');
+            string s = res.Substring(firstIndex).TrimEnd(')');
+
+            JObject jo = (JObject)JsonConvert.DeserializeObject(s);
+            string zone = jo["items"]["7"].ToString();
+            //Newtonsoft.Json.JsonReader reader=new JTokenReader();
+            Console.WriteLine(zone);
             Console.Read();
         }
       

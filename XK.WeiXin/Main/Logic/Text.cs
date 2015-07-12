@@ -4,22 +4,22 @@ using System.Linq;
 using System.Xml;
 using XK.Common;
 using XK.WeiXin.Author;
+using XK.WeiXin.Ext;
 
 namespace XK.WeiXin.Main.Logic {
-    public class Text {
+    public class Text : IMessageLogic {
 
         public Text(XmlDocument xmlRecieve) {
             XmlDoc = xmlRecieve;
-            keywordFuncs.Add(KeyWordEnum.time.ToString(), GetDateTime);
-            keywordFuncs.Add(KeyWordEnum.时间.ToString(), GetDateTime);
-            keywordFuncs.Add(KeyWordEnum.token.ToString(), GetAccessToken);
+            AddKeyWordFunc();
+            AddKeyWordStartFunc();
         }
 
 
         /// <summary>
         /// 接收到的消息
         /// </summary>
-        private XmlDocument XmlDoc { get; set; }
+        public XmlDocument XmlDoc { get; set; }
 
         private string Content { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//Content"); } }
 
@@ -28,37 +28,68 @@ namespace XK.WeiXin.Main.Logic {
         /// </summary>
         /// <returns></returns>
         public string ResponseMessage() {
-            Func<string> keywordFunc =
-                keywordFuncs.FirstOrDefault(d => d.Key == Content).Value;
-            if (keywordFunc == null) {
-                return "";
-            }
-            return keywordFunc();
+            Func<string> keywordFunc = null;
+            keywordFunc = keywordFuncs.FirstOrDefault(d => d.Key == Content).Value ??
+                          keyWordStartFuncs.FirstOrDefault(d => Content.StartsWith(d.Key)).Value;
+            return (keywordFunc == null) ? Content : keywordFunc();
         }
 
-        private readonly Dictionary<string, Func<string>> keywordFuncs =
-            new Dictionary<string, Func<string>>();
 
 
+        private readonly Dictionary<string, Func<string>> keywordFuncs = new Dictionary<string, Func<string>>();
+
+        private void AddKeyWordFunc() {
+            keywordFuncs.Add(KeyWordEnum.time.ToString(), GetDateTime);
+            keywordFuncs.Add(KeyWordEnum.时间.ToString(), GetDateTime);
+            keywordFuncs.Add(KeyWordEnum.token.ToString(), GetAccessToken);
+        }
+
+        private readonly Dictionary<string, Func<string>> keyWordStartFuncs = new Dictionary<string, Func<string>>();
+
+        private void AddKeyWordStartFunc() {
+            keyWordStartFuncs.Add("添加股票", AddStock);
+            keyWordStartFuncs.Add("删除股票",RemoveStock);
+            keyWordStartFuncs.Add("股票", GetStock);
+
+        }
+
+
+        private string AddStock() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            return stock.SaveStock("添加股票");
+        }
+
+        private string RemoveStock() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            return stock.RemoveStock("删除股票");
+        }
+
+        private string GetStock() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            return stock.GetStock("股票");
+        }
+        //#############################################################
+
+
+        private string ReturnText { get; set; }
 
         private string GetDateTime() {
-           
-             string datetime = DateTime.Now.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
-             return CreateSendMsg(datetime);
+
+            ReturnText = DateTime.Now.AddHours(8).ToString("yyyy-MM-dd HH:mm:ss");
+             return CreateSendMsg();
         }
 
         private string GetAccessToken() {
-            string accessToken = AccessToken.Instance.Value;
-            return CreateSendMsg(accessToken);
+            ReturnText = AccessToken.Instance.Value;
+            return CreateSendMsg();
         }
 
 
-
-        private string CreateSendMsg(string content) {
+        public string CreateSendMsg() {
             string ToUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//ToUserName");
             string FromUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName");
             string msg = string.Format(sendXml, FromUserName, ToUserName,
-                TimeConvert.GetDateTimeStamp(DateTime.Now), content);
+                TimeConvert.GetDateTimeStamp(DateTime.Now), ReturnText);
             return msg;
         }
 
