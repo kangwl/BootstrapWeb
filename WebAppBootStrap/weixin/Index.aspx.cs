@@ -10,11 +10,11 @@ using XK.WeiXin;
 namespace WebAppBootStrap.weixin {
     public partial class Index : System.Web.UI.Page {
         protected void Page_Load(object sender, EventArgs e) {
-            Log log=new Log();
-            log.WriteLog("11111111111111111111");
-            log.WriteLog("ready");
+            //Log log=new Log();
+           // log.WriteLog("11111111111111111111");
+            //log.WriteLog("ready");
             XK.WeiXin.Enter enter = new Enter(XK.WeiXin.Author.AppConfig.Instance.Token, Request, Response);
-            log.WriteLog("start");
+           // log.WriteLog("start");
             enter.StartWeiXin();
         }
     }

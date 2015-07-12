@@ -115,7 +115,7 @@ namespace XK.WeiXin.Ext {
                     liststock.Add(stockStr);
                 }
 
-                stocks = string.Join(",", liststock);
+                stocks = string.Join("\n", liststock);
 
             }
             catch (Exception ex) {
@@ -138,7 +138,7 @@ namespace XK.WeiXin.Ext {
             string xianjia = jo["items"]["10"].ToString();
             string zuigao = jo["items"]["8"].ToString();
             string name = jo["items"]["name"].ToString();//name
-            string retStock = string.Format("({4})昨收：{0},涨价：{1},今开：{2},现价：{3}\n", zhuoshou, zhangjia, jinkai, xianjia, name);
+            string retStock = string.Format("({4})昨收：{0},涨价：{1},今开：{2},现价：{3}", zhuoshou, zhangjia, jinkai, xianjia, name);
             return retStock;
         }
 

@@ -40,8 +40,8 @@ namespace XK.WeiXin {
             Action action = dicFunc.FirstOrDefault(d => d.Key == httpmethod_lower).Value;
 
             if (action != null) {
-                Log log=new Log();
-                log.WriteLog("action");
+               // Log log=new Log();
+               // log.WriteLog("action");
                 action();
             }
 
