@@ -10,6 +10,15 @@ using XK.WeiXin.Core;
 namespace XK.WeiXin {
     public class Enter {
 
+        private string Token { get; set; }
+
+        private HttpRequest Request { get; set; }
+
+        private HttpResponse Response { get; set; }
+
+        /// <summary>
+        /// 委托字典
+        /// </summary>
         private readonly Dictionary<string, Action> dicFunc = new Dictionary<string, Action>();
 
         public Enter(string token, HttpRequest request, HttpResponse response) {
@@ -19,12 +28,13 @@ namespace XK.WeiXin {
 
             dicFunc.Add("post", ResponsePostMessage);
             dicFunc.Add("get", Valid);
+
         }
 
         /// <summary>
         /// 调用入口
         /// </summary>
-        public void Start() {
+        public void StartWeiXin() {
 
             string httpmethod_lower = Request.HttpMethod.ToLower();
             Action action = dicFunc.FirstOrDefault(d => d.Key == httpmethod_lower).Value;
@@ -37,12 +47,6 @@ namespace XK.WeiXin {
 
         }
 
-
-        private string Token { get; set; }
-
-        private HttpRequest Request { get; set; }
-
-        private HttpResponse Response { get; set; }
 
         /// <summary>
         /// 验证微信签名

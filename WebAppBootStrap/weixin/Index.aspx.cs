@@ -14,7 +14,7 @@ namespace WebAppBootStrap.weixin {
             log.WriteLog("ready");
             XK.WeiXin.Enter enter = new Enter(XK.WeiXin.Author.AppConfig.Instance.Token, Request, Response);
             log.WriteLog("start");
-            enter.Start();
+            enter.StartWeiXin();
         }
     }
 }

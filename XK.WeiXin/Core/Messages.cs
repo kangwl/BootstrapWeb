@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using XK.WeiXin.Message;
 using XK.WeiXin.Message.MessageInterface;
 
 namespace XK.WeiXin.Core {
@@ -16,6 +17,12 @@ namespace XK.WeiXin.Core {
         
         }
 
+        /// <summary>
+        /// 消息桥接
+        /// 根据不同消息类型，经过不同的处理返回不同的结果
+        /// </summary>
+        /// <param name="xmlStream"></param>
+        /// <returns></returns>
         public string GetResponseMsg(Stream xmlStream) {
             string resMsg = "";
             XmlDocument xmlDoc = Common.XmlHelper.GetXmlDoc(xmlStream);
@@ -28,27 +35,33 @@ namespace XK.WeiXin.Core {
             return resMsg;
         }
 
+        //经过文本消息的逻辑处理后，输出
         private string ResponseTextMsg(XmlDocument xmlDoc) {
 
-            IMessage<Message.Text.MessageModel> textMessage = new Message.Text();
-            Message.Text.MessageModel messageModel = textMessage.GetMessage(xmlDoc);
-            //logic
-            string retText = Logic.TextMessage.ReturnMessage(messageModel);
-            messageModel.Content = retText;
-            messageModel.CreateTime = Common.TimeConvert.GetDateTimeStamp(DateTime.Now);
-            string txtMsg = textMessage.InitSendMessage(messageModel);
+            //获取消息模型
+            IMessage<Message.TextMessage.MessageRecieved_Model, Message.TextMessage.MessageSend_Model> textMessage =
+                new Message.TextMessage();
+            Message.TextMessage.MessageRecieved_Model messageModel = textMessage.GetMessage(xmlDoc);
 
+            //logic
+            Message.TextMessage.MessageSend_Model sendModel = new Logic.TextMessageLogic().ReturnMessage(messageModel);
+ 
+            string txtMsg = textMessage.InitSendMessage(sendModel);
             return txtMsg;
         }
 
         private string ResponseImageMsg(XmlDocument xmlDoc) {
-            IMessage<Message.Image.MessageModel> imageMessage = new Message.Image();
-            Message.Image.MessageModel messageModel = imageMessage.GetMessage(xmlDoc);
-            string picUrl = Logic.ImageMessage.ReturnMessage(messageModel);
-            messageModel.PicUrl = picUrl;
-            messageModel.CreateTime = Common.TimeConvert.GetDateTimeStamp(DateTime.Now);
-            string imgMsg = imageMessage.InitSendMessage(messageModel);
+            IMessage<Message.ImageMessage.MessageRecieve_Model,Message.ImageMessage.MessageSend_Model> imageMessage = new Message.ImageMessage();
+            Message.ImageMessage.MessageRecieve_Model messageModel = imageMessage.GetMessage(xmlDoc);
+
+            Message.ImageMessage.MessageSend_Model sendModel = new Logic.ImageMessageLogic().ReturnMessage(messageModel);
+
+            string imgMsg = imageMessage.InitSendMessage(sendModel);
             return imgMsg;
         }
+
+
+
+
     }
 }
