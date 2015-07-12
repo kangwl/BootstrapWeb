@@ -7,7 +7,7 @@ namespace XK.WeiXin.Message.MessageInterface {
         /// </summary>
         /// <param name="xmlDoc">接收到的消息（已处理为xml文档）</param>
         /// <returns></returns>
-        T1 GetMessage(XmlDocument xmlDoc);
+        T1 GetRecievedMessage(XmlDocument xmlDoc);
 
         /// <summary>
         /// 组装要发送的消息xml

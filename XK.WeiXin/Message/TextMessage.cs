@@ -19,8 +19,8 @@ namespace XK.WeiXin.Message {
 //                            </xml>";
 
 
- 
-        public MessageRecieved_Model GetMessage(XmlDocument xmlDoc) {
+
+        public MessageRecieved_Model GetRecievedMessage(XmlDocument xmlDoc) {
             MessageRecieved_Model messageModel = new MessageRecieved_Model {
                 ToUserName = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//ToUserName"),
                 Content = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//Content"),
@@ -30,8 +30,8 @@ namespace XK.WeiXin.Message {
             };
             return messageModel;
         }
- 
 
+ 
         public string InitSendMessage(MessageSend_Model messageModel) {
             string recieveMsg = "";
             if (messageModel != null) {

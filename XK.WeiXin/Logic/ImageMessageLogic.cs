@@ -8,22 +8,28 @@ namespace XK.WeiXin.Logic {
     /// 消息进
     /// 消息出
     /// </summary>
-    public class ImageMessageLogic : IReturnMessage<ImageMessage.MessageRecieve_Model, ImageMessage.MessageSend_Model> {
+    public class ImageMessageLogic : IReturnMessage<ImageMessage.MessageSend_Model> {
+        public ImageMessageLogic(ImageMessage.MessageRecieve_Model recievedModel) {
+            MessageRecieved = recievedModel;
+        }
+
+        public ImageMessage.MessageRecieve_Model MessageRecieved { get; set; }
+
         /// <summary>
         /// 消息出
         /// </summary>
-        /// <param name="messageModel">进来的消息</param>
         /// <returns></returns>
-        public ImageMessage.MessageSend_Model ReturnMessage(ImageMessage.MessageRecieve_Model messageModel) {
+        public ImageMessage.MessageSend_Model ReturnMessage() {
             //logic
-            ImageMessage.MessageSend_Model messageSend = new ImageMessage.MessageSend_Model();
-            messageSend.MediaId = messageModel.MediaId;
-            messageSend.FromUserName = messageModel.FromUserName;
-            messageSend.CreateTime = TimeConvert.GetDateTimeStamp(DateTime.Now);
-            messageSend.ToUserName = messageModel.ToUserName;
+            ImageMessage.MessageSend_Model messageSend = new ImageMessage.MessageSend_Model {
+                MediaId = MessageRecieved.MediaId,
+                FromUserName = MessageRecieved.FromUserName,
+                CreateTime = TimeConvert.GetDateTimeStamp(DateTime.Now),
+                ToUserName = MessageRecieved.ToUserName
+            };
 
             return messageSend;
         }
-
+ 
     }
 }

@@ -42,10 +42,10 @@ namespace XK.WeiXin.Core {
             //获取消息模型
             IMessage<TextMessage.MessageRecieved_Model, TextMessage.MessageSend_Model> textMessage =
                 new TextMessage();
-            TextMessage.MessageRecieved_Model messageModel = textMessage.GetMessage(xmlDoc);
+            TextMessage.MessageRecieved_Model recievedModel = textMessage.GetRecievedMessage(xmlDoc);
 
             //logic
-            TextMessage.MessageSend_Model sendModel = new TextMessageLogic().ReturnMessage(messageModel);
+            TextMessage.MessageSend_Model sendModel = new TextMessageLogic(recievedModel).ReturnMessage();
  
             string txtMsg = textMessage.InitSendMessage(sendModel);
             return txtMsg;
@@ -53,9 +53,9 @@ namespace XK.WeiXin.Core {
 
         private string ResponseImageMsg(XmlDocument xmlDoc) {
             IMessage<ImageMessage.MessageRecieve_Model,ImageMessage.MessageSend_Model> imageMessage = new ImageMessage();
-            ImageMessage.MessageRecieve_Model messageModel = imageMessage.GetMessage(xmlDoc);
+            ImageMessage.MessageRecieve_Model recieveModel = imageMessage.GetRecievedMessage(xmlDoc);
 
-            ImageMessage.MessageSend_Model sendModel = new ImageMessageLogic().ReturnMessage(messageModel);
+            ImageMessage.MessageSend_Model sendModel = new ImageMessageLogic(recieveModel).ReturnMessage();
 
             string imgMsg = imageMessage.InitSendMessage(sendModel);
             return imgMsg;

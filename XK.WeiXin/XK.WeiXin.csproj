@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Author\AccessToken.cs" />
     <Compile Include="Author\AccessToken_Model.cs" />
     <Compile Include="Author\AppConfig.cs" />
     <Compile Include="Author\AppTicket.cs" />

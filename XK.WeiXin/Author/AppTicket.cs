@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using XK.Common.web;
 
 namespace XK.WeiXin.Author {
@@ -47,6 +48,10 @@ namespace XK.WeiXin.Author {
                JsonConvert.DeserializeObject<AccessToken_Model>(jsonAccessToken);
            return accessToken;
        }
+
+
+
+
 
    }
 }

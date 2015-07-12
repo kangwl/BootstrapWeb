@@ -47,7 +47,7 @@ namespace XK.WeiXin.Message {
                                  <MsgId>1234567890123456</MsgId>
                                  </xml>";
 
-        public MessageRecieve_Model GetMessage(XmlDocument xmlDoc) {
+        public MessageRecieve_Model GetRecievedMessage(XmlDocument xmlDoc) {
             MessageRecieve_Model messageModel = new MessageRecieve_Model();
             messageModel.ToUserName = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//ToUserName");
             messageModel.FromUserName = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//FromUserName");
