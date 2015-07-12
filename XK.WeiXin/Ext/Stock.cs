@@ -33,8 +33,7 @@ namespace XK.WeiXin.Ext {
           private string Content { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//Content"); } }
           private string FromUserName { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName"); } }
 
-          private string JsonPath { get { return string.Format(AppDomain.CurrentDomain.BaseDirectory+"stock\\{0}.json", FromUserName); } }
-          private string JsonPath1 { get { return string.Format(AppDomain.CurrentDomain.BaseDirectory + "stock\\{0}.txt", FromUserName); } }
+          private string JsonPath { get { return string.Format(AppDomain.CurrentDomain.BaseDirectory+"stock\\{0}.txt", FromUserName); } }
 
           private string logpath { get { return string.Format(AppDomain.CurrentDomain.BaseDirectory + "stocklog\\{0}.txt", FromUserName); } }
         public string SaveStock(string startWords) {
@@ -54,7 +53,6 @@ namespace XK.WeiXin.Ext {
             log.WriteLog(JsonPath);
           
             success = Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
-            Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath1);
 
             }
             catch (Exception ex) {
