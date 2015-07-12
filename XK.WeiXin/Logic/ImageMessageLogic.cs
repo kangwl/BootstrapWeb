@@ -22,7 +22,7 @@ namespace XK.WeiXin.Logic {
             messageSend.CreateTime = TimeConvert.GetDateTimeStamp(DateTime.Now);
             messageSend.ToUserName = messageModel.ToUserName;
 
-            return default(ImageMessage.MessageSend_Model);
+            return messageSend;
         }
 
     }
