@@ -6,13 +6,13 @@ using System.Xml;
 using XK.Common;
 using XK.WeiXin.Main.Logic;
 
-
-namespace XK.WeiXin.Core {
+namespace XK.WeiXin.Main.JudgeMessage {
     public class Messages {
         private readonly Dictionary<string, Func<XmlDocument, string>> dicFuncMessage = new Dictionary<string, Func<XmlDocument, string>>();
         public Messages() {
             dicFuncMessage.Add(MessageTypeEnum.text.ToString(), ResponseTextMsg);
-            dicFuncMessage.Add(MessageTypeEnum.image.ToString(), ResponseArticleMsg);
+            dicFuncMessage.Add(MessageTypeEnum.image.ToString(), ResponseImageMsg);
+
         
         }
 
@@ -37,22 +37,20 @@ namespace XK.WeiXin.Core {
         //经过文本消息的逻辑处理后，输出
         private string ResponseTextMsg(XmlDocument xmlDoc) {
 
+            //获取消息模型
             Main.Logic.Text text = new Text(xmlDoc);
-            string txtMsg = text.ResponseMessage();
-            return txtMsg;
+
+            return text.ResponseMessage();
         }
 
         private string ResponseImageMsg(XmlDocument xmlDoc) {
             Main.Logic.Image image = new Image(xmlDoc);
-
-            string imgMsg = image.ResponseMessage();
-            return imgMsg;
+            return image.ResponseMessage();
         }
 
         private string ResponseArticleMsg(XmlDocument xmlDoc) {
             Main.Logic.Article article = new Article(xmlDoc);
-            string message = article.ResponseMessage();
-            return message;
+            return article.ResponseMessage();
         }
 
 
