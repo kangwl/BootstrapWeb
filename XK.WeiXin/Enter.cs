@@ -21,6 +21,9 @@ namespace XK.WeiXin {
             dicFunc.Add("get", Valid);
         }
 
+        /// <summary>
+        /// 调用入口
+        /// </summary>
         public void Start() {
 
             string httpmethod_lower = Request.HttpMethod.ToLower();
@@ -71,17 +74,11 @@ namespace XK.WeiXin {
         private void Valid() {
 
             string echoStr = Request.QueryString["echoStr"];
-
             if (CheckSignature()) {
-
                 if (!string.IsNullOrEmpty(echoStr)) {
-
                     Response.Write(echoStr);
-
                     Response.End();
-
                 }
-
             }
         }
 
