@@ -56,8 +56,8 @@ namespace XK.WeiXin.Main.Logic {
 
 
         private string AddStock() {
-            Log log=new Log();
-            log.WriteLog("AddStock");
+           // Log log=new Log();
+           // log.WriteLog("AddStock");
             Ext.Stock stock = new Stock(XmlDoc);
             ReturnText = stock.SaveStock("添加股票");
             return CreateSendMsg();

@@ -39,31 +39,33 @@ namespace XK.WeiXin.Ext {
           private string JsonPath { get { return  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format("stock\\{0}.txt", FromUserName)); } }
 
         public string SaveStock(string startWords) {
-            Log log = new Log();
-            log.WriteLog("223sdd");
-            bool success=true;
+           // Log log = new Log();
+           // log.WriteLog("223sdd");
+            bool success = true;
             try {
+                List<string> codeList = GetCodeList();
 
-            StockModel stockModel = new StockModel();
-            stockModel.OpenID = FromUserName;
-            string codes = Content.Substring(startWords.Length).Trim();
-            string[] arr = codes.Split(',');
-            foreach (string code in arr) {
-              stockModel.StockCodes.Add(code.Trim());
-            }
+                StockModel stockModel = new StockModel();
+                stockModel.StockCodes.AddRange(codeList);
+                stockModel.OpenID = FromUserName;
+                string codes = Content.Substring(startWords.Length).Trim();
+                string[] arr = codes.Split(',');
+                foreach (string code in arr) {
+                    stockModel.StockCodes.Add(code.Trim());
+                }
 
-                log.WriteLog(JsonPath);
+                //log.WriteLog(JsonPath);
                 if (!Directory.Exists(JsonPath1)) {
                     Directory.CreateDirectory(JsonPath1);
                 }
 
                 Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
 
-            log.WriteLog("ok");
+               // log.WriteLog("ok");
             }
             catch (Exception ex) {
                 success = false;
-                log.WriteLog(ex.Message);
+               // log.WriteLog(ex.Message);
             }
 
             return success ? "添加成功" : "添加失败";
@@ -88,14 +90,22 @@ namespace XK.WeiXin.Ext {
             return success ? "删除成功" : "删除失败";
         }
 
+        private List<string> GetCodeList() {
+            List<string> codeList = new List<string>();
+            if (Directory.Exists(JsonPath1)) {
+                StockModel stockModel = Common.json.JsonHelper<StockModel>.DeserializeFromFile(JsonPath);
+
+                codeList = stockModel.StockCodes;
+            }
+            return codeList;
+        }
+
         public string GetStock(string startWords) {
             string stocks = "";
             Log log = new Log();
             try {
 
-                StockModel stockModel = Common.json.JsonHelper<StockModel>.DeserializeFromFile(JsonPath);
-                log.WriteLog("sss++==="+stockModel.OpenID);
-                List<string> codeList = stockModel.StockCodes;
+                List<string> codeList = GetCodeList();
                 List<string> liststock = new List<string>();
                 foreach (string code in codeList) {
                     string codeReq = GetCodeStr(code.Trim());
@@ -127,7 +137,8 @@ namespace XK.WeiXin.Ext {
             string jinkai = jo["items"]["7"].ToString();
             string xianjia = jo["items"]["10"].ToString();
             string zuigao = jo["items"]["8"].ToString();
-            string retStock = string.Format("昨收：{0},涨价：{1},今开：{2},现价：{3}", zhuoshou, zhangjia, jinkai, xianjia);
+            string name = jo["items"]["name"].ToString();//name
+            string retStock = string.Format("({4})昨收：{0},涨价：{1},今开：{2},现价：{3}", zhuoshou, zhangjia, jinkai, xianjia, name);
             return retStock;
         }
 

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Xml;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -31,15 +32,15 @@ namespace ConsoleAppTest {
 //            Console.WriteLine(a);
 //            Console.WriteLine("end");
 //            Console.Read();
-            XK.Common.web.HttpWebHelper webHelper = new HttpWebHelper("http://d.10jqka.com.cn/v2/realhead/hs_600372/last.js");
-            string res = webHelper.GetResponseStr();
-            int firstIndex = res.IndexOf('{');
-            string s = res.Substring(firstIndex).TrimEnd(')');
+            //XK.Common.web.HttpWebHelper webHelper = new HttpWebHelper("http://d.10jqka.com.cn/v2/realhead/hs_600372/last.js");
+            //string res = webHelper.GetResponseStr();
+            //int firstIndex = res.IndexOf('{');
+            //string s = res.Substring(firstIndex).TrimEnd(')');
 
-            JObject jo = (JObject)JsonConvert.DeserializeObject(s);
-            string zone = jo["items"]["7"].ToString();
+            //JObject jo = (JObject)JsonConvert.DeserializeObject(s);
+            //string zone = jo["items"]["7"].ToString();
             //Newtonsoft.Json.JsonReader reader=new JTokenReader();
-            Console.WriteLine(zone);
+            Console.WriteLine("\u4e2d\u822a\u7535\u5b50");
             Console.Read();
         }
       
