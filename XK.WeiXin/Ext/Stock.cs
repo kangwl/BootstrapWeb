@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
@@ -33,13 +34,12 @@ namespace XK.WeiXin.Ext {
           private string Content { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//Content"); } }
           private string FromUserName { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName"); } }
 
-          private string JsonPath { get { return string.Format(AppDomain.CurrentDomain.BaseDirectory+"stock\\{0}.txt", FromUserName); } }
+          private string JsonPath { get { return  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format("stock\\{0}.txt", FromUserName)); } }
 
-          private string logpath { get { return string.Format(AppDomain.CurrentDomain.BaseDirectory + "stocklog\\{0}.txt", FromUserName); } }
         public string SaveStock(string startWords) {
-            Log log = new Log(logpath);
+            Log log = new Log();
             log.WriteLog("223sdd");
-            bool success=false;
+            bool success=true;
             try {
 
             StockModel stockModel = new StockModel();
@@ -52,10 +52,12 @@ namespace XK.WeiXin.Ext {
       
             log.WriteLog(JsonPath);
           
-            success = Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
+            Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
 
+            log.WriteLog("ok");
             }
             catch (Exception ex) {
+                success = false;
                 log.WriteLog(ex.Message);
             }
 
@@ -69,8 +71,15 @@ namespace XK.WeiXin.Ext {
             foreach (string code in arr) {
                 codes.Remove(code.Trim());
             }
-            bool success = Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
+            bool success = true;
+            try {
 
+            Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
+
+            }
+            catch (Exception) {
+                success = false;
+            }
             return success ? "删除成功" : "删除失败";
         }
 

@@ -59,19 +59,15 @@ namespace XK.Common.json {
         /// <param name="t"></param>
         /// <param name="file">@"c:\movie.json"</param>
         /// <returns></returns>
-        public static bool Serialize2File(T t, string file) {
+        public static void Serialize2File(T t, string file) {
             // serialize JSON directly to a file
-            bool saveSuccess = true;
-            try {
+  
+        
                 using (StreamWriter streamWriter = File.CreateText(file)) {
                     JsonSerializer serializer = new JsonSerializer();
                     serializer.Serialize(streamWriter, t);
                 }
-            }
-            catch (Exception) {
-                saveSuccess = false;
-            }
-            return saveSuccess;
+      
         }
         /// <summary>
         /// 反序列化成对象
