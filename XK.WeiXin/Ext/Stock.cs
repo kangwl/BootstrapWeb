@@ -34,7 +34,11 @@ namespace XK.WeiXin.Ext {
           private string FromUserName { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName"); } }
 
           private string JsonPath { get { return string.Format("stock\\{0}.json", FromUserName); } }
-        public string SaveStock(string startWords) { 
+        public string SaveStock(string startWords) {
+            Log log = new Log();
+            bool success=false;
+            try {
+
             StockModel stockModel = new StockModel();
             stockModel.OpenID = FromUserName;
             string codes = Content.Substring(startWords.Length).Trim();
@@ -42,10 +46,18 @@ namespace XK.WeiXin.Ext {
             foreach (string code in arr) {
               stockModel.StockCodes.Add(code.Trim());
             }
-            bool success = Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
+      
+            log.WriteLog(JsonPath);
+          
+            success = Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
+
+
+            }
+            catch (Exception ex) {
+                log.WriteLog(ex.Message);
+            }
 
             return success ? "添加成功" : "添加失败";
-
         }
 
         public string RemoveStock(string startWords) {
