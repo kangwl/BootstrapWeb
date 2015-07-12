@@ -100,7 +100,7 @@ namespace XK.WeiXin.Ext {
                 foreach (string code in codeList) {
                     string codeReq = GetCodeStr(code.Trim());
                     string reqUrl = string.Format(StockJS, codeReq);
-
+                    log.WriteLog(reqUrl);
                     string stockStr = GetWebreq(reqUrl);
                     liststock.Add(stockStr);
                 }
@@ -138,10 +138,10 @@ namespace XK.WeiXin.Ext {
             string codeStr = "{0}_{1}";
             string codeW = "hs_600372";
             if (code.StartsWith("6")) {
-                codeW = string.Format(codeStr, "hs_", code);
+                codeW = string.Format(codeStr, "hs", code);
             }
             else if (code.StartsWith("0")) {
-                codeW = string.Format(codeStr, "sz_", code);
+                codeW = string.Format(codeStr, "sz", code);
             }
             return codeW;
         }
