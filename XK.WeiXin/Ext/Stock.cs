@@ -112,7 +112,7 @@ namespace XK.WeiXin.Ext {
                     string reqUrl = string.Format(StockJS, codeReq);
                     log.WriteLog(reqUrl);
                     string stockStr = GetWebreq(reqUrl);
-                    liststock.Add(stockStr);
+                    liststock.Add(code + stockStr);
                 }
 
                 stocks = string.Join("\n", liststock);
