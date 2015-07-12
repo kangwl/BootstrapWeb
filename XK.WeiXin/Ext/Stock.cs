@@ -36,7 +36,7 @@ namespace XK.WeiXin.Ext {
 
           private string JsonPath1 { get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "stock"); } }
 
-          private string JsonPath { get { return Path.Combine(JsonPath1, string.Format("\\{0}.txt", FromUserName)); } }
+          private string JsonPath { get { return  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format("stock\\{0}.txt", FromUserName)); } }
 
         public string SaveStock(string startWords) {
             Log log = new Log();
