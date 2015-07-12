@@ -34,7 +34,9 @@ namespace XK.WeiXin.Ext {
           private string Content { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//Content"); } }
           private string FromUserName { get { return XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName"); } }
 
-          private string JsonPath { get { return  Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format("stock\\{0}.txt", FromUserName)); } }
+          private string JsonPath1 { get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "stock"); } }
+
+          private string JsonPath { get { return Path.Combine(JsonPath1, string.Format("\\{0}.txt", FromUserName)); } }
 
         public string SaveStock(string startWords) {
             Log log = new Log();
@@ -49,10 +51,13 @@ namespace XK.WeiXin.Ext {
             foreach (string code in arr) {
               stockModel.StockCodes.Add(code.Trim());
             }
-      
-            log.WriteLog(JsonPath);
-          
-            Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
+
+                log.WriteLog(JsonPath);
+                if (!Directory.Exists(JsonPath1)) {
+                    Directory.CreateDirectory(JsonPath1);
+                }
+
+                Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
 
             log.WriteLog("ok");
             }
