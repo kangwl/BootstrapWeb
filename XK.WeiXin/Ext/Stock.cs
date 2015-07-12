@@ -89,18 +89,29 @@ namespace XK.WeiXin.Ext {
         }
 
         public string GetStock(string startWords) {
-            StockModel stockModel = Common.json.JsonHelper<StockModel>.DeserializeFromFile(JsonPath);
-            List<string> codeList = stockModel.StockCodes;
-            List<string> liststock = new List<string>();
-            foreach (string code in codeList) {
-                string codeReq = GetCodeStr(code.Trim());
-                string reqUrl = string.Format(StockJS, codeReq);
+            string stocks = "";
+            Log log = new Log();
+            try {
 
-                string stockStr = GetWebreq(reqUrl);
-                liststock.Add(stockStr);
+                StockModel stockModel = Common.json.JsonHelper<StockModel>.DeserializeFromFile(JsonPath);
+                log.WriteLog("sss++==="+stockModel.OpenID);
+                List<string> codeList = stockModel.StockCodes;
+                List<string> liststock = new List<string>();
+                foreach (string code in codeList) {
+                    string codeReq = GetCodeStr(code.Trim());
+                    string reqUrl = string.Format(StockJS, codeReq);
+
+                    string stockStr = GetWebreq(reqUrl);
+                    liststock.Add(stockStr);
+                }
+
+                stocks = string.Join(",", liststock);
+
             }
-
-            string stocks = string.Join(",", liststock);
+            catch (Exception ex) {
+         
+                log.WriteLog(ex.ToString());
+            }
             return stocks;
         }
 
