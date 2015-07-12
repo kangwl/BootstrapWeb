@@ -28,10 +28,11 @@ namespace XK.WeiXin.Main.Logic {
         /// </summary>
         /// <returns></returns>
         public string ResponseMessage() {
+            ReturnText = Content;
             Func<string> keywordFunc = null;
             keywordFunc = keywordFuncs.FirstOrDefault(d => d.Key == Content).Value ??
                           keyWordStartFuncs.FirstOrDefault(d => Content.StartsWith(d.Key)).Value;
-            return (keywordFunc == null) ? Content : keywordFunc();
+            return (keywordFunc == null) ? CreateSendMsg() : keywordFunc();
         }
 
 
@@ -56,17 +57,20 @@ namespace XK.WeiXin.Main.Logic {
 
         private string AddStock() {
             Ext.Stock stock = new Stock(XmlDoc);
-            return stock.SaveStock("添加股票");
+            ReturnText = stock.SaveStock("添加股票");
+            return CreateSendMsg();
         }
 
         private string RemoveStock() {
             Ext.Stock stock = new Stock(XmlDoc);
-            return stock.RemoveStock("删除股票");
+            ReturnText = stock.RemoveStock("删除股票");
+            return CreateSendMsg();
         }
 
         private string GetStock() {
             Ext.Stock stock = new Stock(XmlDoc);
-            return stock.GetStock("股票");
+            ReturnText = stock.GetStock("股票");
+            return CreateSendMsg();
         }
         //#############################################################
 
@@ -88,6 +92,7 @@ namespace XK.WeiXin.Main.Logic {
         public string CreateSendMsg() {
             string ToUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//ToUserName");
             string FromUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName");
+
             string msg = string.Format(sendXml, FromUserName, ToUserName,
                 TimeConvert.GetDateTimeStamp(DateTime.Now), ReturnText);
             return msg;
