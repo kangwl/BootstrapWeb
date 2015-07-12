@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
+using XK.Common;
 using XK.WeiXin.Message.MessageBase;
 using XK.WeiXin.Message.MessageInterface;
 
 namespace XK.WeiXin.Message {
-    public class TextMessage:IMessage<Message.TextMessage.MessageRecieved_Model,Message.TextMessage.MessageSend_Model> {
+    public class TextMessage:IMessage<TextMessage.MessageRecieved_Model,TextMessage.MessageSend_Model> {
 
 //        /// <summary>
 //        /// 接收的文本消息格式
@@ -27,11 +22,11 @@ namespace XK.WeiXin.Message {
  
         public MessageRecieved_Model GetMessage(XmlDocument xmlDoc) {
             MessageRecieved_Model messageModel = new MessageRecieved_Model {
-                ToUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//ToUserName"),
-                Content = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//Content"),
-                CreateTime = long.Parse(Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//CreateTime")),
-                FromUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//FromUserName"),
-                MsgId = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MsgId")
+                ToUserName = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//ToUserName"),
+                Content = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//Content"),
+                CreateTime = long.Parse(XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//CreateTime")),
+                FromUserName = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//FromUserName"),
+                MsgId = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MsgId")
             };
             return messageModel;
         }

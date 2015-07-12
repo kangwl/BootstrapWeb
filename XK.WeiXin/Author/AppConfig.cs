@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace XK.WeiXin.Author {
+﻿namespace XK.WeiXin.Author {
     public class AppConfig {
 
         private AppConfig() { }

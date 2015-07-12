@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace XK.WeiXin.Message.MessageBase {
+﻿namespace XK.WeiXin.Message.MessageBase {
     /// <summary>
     /// 发送给用户的基类
     /// </summary>

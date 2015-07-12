@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml;
+﻿using System.Xml;
+using XK.Common;
+using XK.WeiXin.Message.MessageBase;
 using XK.WeiXin.Message.MessageInterface;
 
 namespace XK.WeiXin.Message {
     public class ImageMessage : IMessage<ImageMessage.MessageRecieve_Model, ImageMessage.MessageSend_Model> {
 
-        public class MessageRecieve_Model : MessageBase.Recieve {
+        public class MessageRecieve_Model : Recieve {
 
             /// <summary>
             /// image
@@ -32,8 +30,7 @@ namespace XK.WeiXin.Message {
 
         }
 
-        public class MessageSend_Model:MessageBase.Send {
-            public string MsgType = "image";
+        public class MessageSend_Model:Send {
             /// <summary>
             /// 图片消息媒体id，可以调用多媒体文件下载接口拉取数据。
             /// </summary>
@@ -52,12 +49,12 @@ namespace XK.WeiXin.Message {
 
         public MessageRecieve_Model GetMessage(XmlDocument xmlDoc) {
             MessageRecieve_Model messageModel = new MessageRecieve_Model();
-            messageModel.ToUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//ToUserName");
-            messageModel.FromUserName = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//FromUserName");
-            messageModel.CreateTime = long.Parse(Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//CreateTime"));
-            messageModel.PicUrl = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//PicUrl");
-            messageModel.MediaId = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MediaId");
-            messageModel.MsgId = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MsgId");
+            messageModel.ToUserName = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//ToUserName");
+            messageModel.FromUserName = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//FromUserName");
+            messageModel.CreateTime = long.Parse(XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//CreateTime"));
+            messageModel.PicUrl = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//PicUrl");
+            messageModel.MediaId = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MediaId");
+            messageModel.MsgId = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MsgId");
             return messageModel;
         }
 
@@ -73,7 +70,7 @@ namespace XK.WeiXin.Message {
                                 </xml>";
  
 
-        public string InitSendMessage(ImageMessage.MessageSend_Model messageModel) {
+        public string InitSendMessage(MessageSend_Model messageModel) {
             string recieveMsg = "";
             if (messageModel != null) {
                 recieveMsg = string.Format(sendXml, messageModel.FromUserName, messageModel.ToUserName,

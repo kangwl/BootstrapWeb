@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Newtonsoft.Json;
 using XK.Common.web;
 
 namespace XK.WeiXin.Author {
@@ -25,14 +22,14 @@ namespace XK.WeiXin.Author {
 
        public string GetAccessTokenJson() {
            string reqUrl = string.Format(GetAccessTokenUrl(AppConfig.Instance.AppID, AppConfig.Instance.AppSecret));
-           Common.web.HttpWebHelper httpWebHelper = new HttpWebHelper(reqUrl);
+           HttpWebHelper httpWebHelper = new HttpWebHelper(reqUrl);
            string json = httpWebHelper.GetResponseStr();
            return json;
        }
 
        public string GetAccessTokenJson(string appID, string appSecret) {
            string reqUrl = string.Format(GetAccessTokenUrl(appID, appSecret));
-           Common.web.HttpWebHelper httpWebHelper = new HttpWebHelper(reqUrl);
+           HttpWebHelper httpWebHelper = new HttpWebHelper(reqUrl);
            string json = httpWebHelper.GetResponseStr();
            return json;
        }
@@ -40,14 +37,14 @@ namespace XK.WeiXin.Author {
        public AccessToken_Model GetAccessToken() {
            string jsonAccessToken = GetAccessTokenJson();
            AccessToken_Model accessToken =
-               Newtonsoft.Json.JsonConvert.DeserializeObject<AccessToken_Model>(jsonAccessToken);
+               JsonConvert.DeserializeObject<AccessToken_Model>(jsonAccessToken);
            return accessToken;
        }
 
        public AccessToken_Model GetAccessToken(string appID, string appSecret) {
            string jsonAccessToken = GetAccessTokenJson(appID, appSecret);
            AccessToken_Model accessToken =
-               Newtonsoft.Json.JsonConvert.DeserializeObject<AccessToken_Model>(jsonAccessToken);
+               JsonConvert.DeserializeObject<AccessToken_Model>(jsonAccessToken);
            return accessToken;
        }
 

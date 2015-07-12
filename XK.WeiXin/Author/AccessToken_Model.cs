@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace XK.WeiXin.Author {
+﻿namespace XK.WeiXin.Author {
     /// <summary>
     /// 获取到的凭证
     /// access_token的有效期目前为2个小时，需定时刷新，重复获取将导致上次获取的access_token失效。

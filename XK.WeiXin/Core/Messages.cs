@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Xml;
+using XK.Common;
+using XK.WeiXin.Logic;
 using XK.WeiXin.Message;
 using XK.WeiXin.Message.MessageInterface;
 
@@ -25,8 +26,8 @@ namespace XK.WeiXin.Core {
         /// <returns></returns>
         public string GetResponseMsg(Stream xmlStream) {
             string resMsg = "";
-            XmlDocument xmlDoc = Common.XmlHelper.GetXmlDoc(xmlStream);
-            string msgType = Common.XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MsgType");
+            XmlDocument xmlDoc = XmlHelper.GetXmlDoc(xmlStream);
+            string msgType = XmlHelper.GetXmlNodeTextByXpath(xmlDoc, "//MsgType");
 
             Func<XmlDocument, string> funcMessage = dicFuncMessage.FirstOrDefault(d => d.Key == msgType).Value;
             if (funcMessage != null) {
@@ -39,22 +40,22 @@ namespace XK.WeiXin.Core {
         private string ResponseTextMsg(XmlDocument xmlDoc) {
 
             //获取消息模型
-            IMessage<Message.TextMessage.MessageRecieved_Model, Message.TextMessage.MessageSend_Model> textMessage =
-                new Message.TextMessage();
-            Message.TextMessage.MessageRecieved_Model messageModel = textMessage.GetMessage(xmlDoc);
+            IMessage<TextMessage.MessageRecieved_Model, TextMessage.MessageSend_Model> textMessage =
+                new TextMessage();
+            TextMessage.MessageRecieved_Model messageModel = textMessage.GetMessage(xmlDoc);
 
             //logic
-            Message.TextMessage.MessageSend_Model sendModel = new Logic.TextMessageLogic().ReturnMessage(messageModel);
+            TextMessage.MessageSend_Model sendModel = new TextMessageLogic().ReturnMessage(messageModel);
  
             string txtMsg = textMessage.InitSendMessage(sendModel);
             return txtMsg;
         }
 
         private string ResponseImageMsg(XmlDocument xmlDoc) {
-            IMessage<Message.ImageMessage.MessageRecieve_Model,Message.ImageMessage.MessageSend_Model> imageMessage = new Message.ImageMessage();
-            Message.ImageMessage.MessageRecieve_Model messageModel = imageMessage.GetMessage(xmlDoc);
+            IMessage<ImageMessage.MessageRecieve_Model,ImageMessage.MessageSend_Model> imageMessage = new ImageMessage();
+            ImageMessage.MessageRecieve_Model messageModel = imageMessage.GetMessage(xmlDoc);
 
-            Message.ImageMessage.MessageSend_Model sendModel = new Logic.ImageMessageLogic().ReturnMessage(messageModel);
+            ImageMessage.MessageSend_Model sendModel = new ImageMessageLogic().ReturnMessage(messageModel);
 
             string imgMsg = imageMessage.InitSendMessage(sendModel);
             return imgMsg;

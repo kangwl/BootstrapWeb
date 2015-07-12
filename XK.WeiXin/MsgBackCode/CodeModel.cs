@@ -3,7 +3,7 @@
     /// 错误码等信息 
     /// JSON {"errcode":40013,"errmsg":"invalid appid"}
     /// </summary>
-    public class ErrorModel {
+    public class CodeModel {
         /// <summary>
         /// 错误码
         /// </summary>
