@@ -11,8 +11,8 @@ namespace XK.WeiXin.Core {
     public class Messages {
         private readonly Dictionary<string, Func<XmlDocument, string>> dicFuncMessage = new Dictionary<string, Func<XmlDocument, string>>();
         public Messages() {
-            dicFuncMessage.Add(MessageTypeEnum.text.ToString(), ResponseTextMsg);
-            dicFuncMessage.Add(MessageTypeEnum.image.ToString(), ResponseArticleMsg);
+            dicFuncMessage.Add(MessageTypeEnum.text, ResponseTextMsg);
+            dicFuncMessage.Add(MessageTypeEnum.image, ResponseArticleMsg);
             dicFuncMessage.Add(MessageTypeEnum.events, ResponseEventMsg);
         }
 

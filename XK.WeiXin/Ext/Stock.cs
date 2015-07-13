@@ -43,7 +43,7 @@ namespace XK.WeiXin.Ext {
            // log.WriteLog("223sdd");
             bool success = true;
             try {
-                List<string> codeList = GetCodeList();
+                IEnumerable<string> codeList = GetCodeList();
 
                 StockModel stockModel = new StockModel();
                 stockModel.StockCodes.AddRange(codeList);
@@ -109,7 +109,7 @@ namespace XK.WeiXin.Ext {
             return success ? "已删除全部股票" : "删除失败";
         }
 
-        private List<string> GetCodeList() {
+        private IEnumerable<string> GetCodeList() {
             List<string> codeList = new List<string>();
             if (Directory.Exists(JsonPath1)) {
                 StockModel stockModel = Common.json.JsonHelper<StockModel>.DeserializeFromFile(JsonPath);
@@ -127,7 +127,7 @@ namespace XK.WeiXin.Ext {
            
             try {
 
-                List<string> codeList = GetCodeList();
+                IEnumerable<string> codeList = GetCodeList();
                 List<string> liststock = new List<string>();
                 foreach (string code in codeList) {
                     string codeReq = GetCodeStr(code.Trim());
@@ -193,9 +193,9 @@ namespace XK.WeiXin.Ext {
             string name = jo["items"]["name"].ToString();//name
 
             float zhangjiaF = zhangjia.ToFloat();
-            string percentF = ((zhangjiaF/jinkai.ToFloat())*100).ToString("F");
+            string percentF = ((zhangjiaF / zhuoshou.ToFloat()) * 100).ToString("F");
             string percentStr = percentF + "%";
-            string retStock = string.Format("-{4}\n 涨价：{0},今开：{1} \n 现价：{2},涨幅：{3}\n", zhangjia, jinkai, xianjia,percentStr, name);
+            string retStock = string.Format("-{4}\n 今开：{1},涨价：{0} \n 现价：{2},涨幅：{3}\n", zhangjia, jinkai, xianjia,percentStr, name);
 
             return retStock;
         }
