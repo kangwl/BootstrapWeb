@@ -138,7 +138,11 @@ namespace XK.WeiXin.Ext {
             string xianjia = jo["items"]["10"].ToString();
             string zuigao = jo["items"]["8"].ToString();
             string name = jo["items"]["name"].ToString();//name
-            string retStock = string.Format("({4})昨收：{0},涨价：{1},今开：{2},现价：{3}", zhuoshou, zhangjia, jinkai, xianjia, name);
+                        float zhangjiaF = zhangjia.ToFloat();
+            float percentF = (zhangjiaF/jinkai.ToFloat())*100;
+            string percentStr = percentF.ToString() + "%";
+            string retStock = string.Format("-{4}\n 涨价：{0},今开：{1} \n 现价：{2},涨幅：{3}", zhangjia, jinkai, xianjia,percentStr, name);
+
             return retStock;
         }
 
