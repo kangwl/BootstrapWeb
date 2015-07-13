@@ -51,8 +51,6 @@
     <Compile Include="Core\MessageTypeEnum.cs" />
     <Compile Include="Enter.cs" />
     <Compile Include="Ext\Stock.cs" />
-    <Compile Include="Main\JudgeMessage\Messages.cs" />
-    <Compile Include="Main\JudgeMessage\MessageTypeEnum.cs" />
     <Compile Include="Main\Logic\Article.cs" />
     <Compile Include="Main\Logic\Event.cs" />
     <Compile Include="Main\Logic\IMessageLogic.cs" />

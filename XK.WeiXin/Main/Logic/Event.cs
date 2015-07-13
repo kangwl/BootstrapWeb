@@ -102,9 +102,9 @@ namespace XK.WeiXin.Main.Logic {
             string FromUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName");
 
             string msg = string.Format(Text.sendXml, FromUserName, ToUserName,
-                TimeConvert.GetDateTimeStamp(DateTime.Now), ReturnText);
+                TimeConvert.GetDateTimeStamp(DateTime.Now), sb.ToString());
 
-            return sb.ToString();
+            return msg;
         }
     }
 }
