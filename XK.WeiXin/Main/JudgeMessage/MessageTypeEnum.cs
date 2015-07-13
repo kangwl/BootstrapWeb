@@ -2,6 +2,7 @@
     public enum MessageTypeEnum {
         text,
         image,
-        news
+        news,
+        _event
     }
 }

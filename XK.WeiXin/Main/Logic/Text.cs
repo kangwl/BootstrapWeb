@@ -43,6 +43,7 @@ namespace XK.WeiXin.Main.Logic {
             keywordFuncs.Add(KeyWordEnum.time.ToString(), GetDateTime);
             keywordFuncs.Add(KeyWordEnum.时间.ToString(), GetDateTime);
             keywordFuncs.Add(KeyWordEnum.token.ToString(), GetAccessToken);
+            keywordFuncs.Add(KeyWordEnum.命令.ToString(), GetCommandList);
         }
 
         private readonly Dictionary<string, Func<string>> keyWordStartFuncs = new Dictionary<string, Func<string>>();
@@ -104,6 +105,11 @@ namespace XK.WeiXin.Main.Logic {
             return CreateSendMsg();
         }
 
+        private string GetCommandList() {
+            ReturnText = new Event(XmlDoc).CreateSendMsg();
+            return CreateSendMsg();
+        }
+
 
         public string CreateSendMsg() {
             string ToUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//ToUserName");
@@ -117,7 +123,8 @@ namespace XK.WeiXin.Main.Logic {
         public enum KeyWordEnum {
             time,
             时间,
-            token
+            token,
+            命令
         }
 
         //        /// <summary>

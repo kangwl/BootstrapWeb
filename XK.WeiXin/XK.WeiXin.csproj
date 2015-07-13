@@ -54,6 +54,7 @@
     <Compile Include="Main\JudgeMessage\Messages.cs" />
     <Compile Include="Main\JudgeMessage\MessageTypeEnum.cs" />
     <Compile Include="Main\Logic\Article.cs" />
+    <Compile Include="Main\Logic\Event.cs" />
     <Compile Include="Main\Logic\IMessageLogic.cs" />
     <Compile Include="Main\Logic\Image.cs" />
     <Compile Include="Main\Logic\Text.cs" />
