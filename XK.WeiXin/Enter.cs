@@ -96,7 +96,7 @@ namespace XK.WeiXin {
                 Core.Messages messages = new Messages();
                 string resMsg = messages.GetResponseMsg(xmStream);
                 Log log=new Log();
-                log.WriteLog(resMsg);
+                log.WriteLog("ResponsePostMessage:" + resMsg);
                 Response.Write(resMsg);
                 Response.End();
             }

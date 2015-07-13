@@ -13,7 +13,7 @@ namespace XK.WeiXin.Core {
         public Messages() {
             dicFuncMessage.Add(MessageTypeEnum.text.ToString(), ResponseTextMsg);
             dicFuncMessage.Add(MessageTypeEnum.image.ToString(), ResponseArticleMsg);
-        
+            dicFuncMessage.Add(MessageTypeEnum.events, ResponseEventMsg);
         }
 
         /// <summary>
@@ -55,6 +55,10 @@ namespace XK.WeiXin.Core {
             return message;
         }
 
+        private string ResponseEventMsg(XmlDocument xmlDoc) {
+            Main.Logic.Event eEvent = new Event(xmlDoc);
+            return eEvent.ResponseMessage();
+        }
 
 
     }

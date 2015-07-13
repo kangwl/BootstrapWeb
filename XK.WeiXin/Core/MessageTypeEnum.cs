@@ -1,7 +1,8 @@
 ﻿namespace XK.WeiXin.Core {
-    public enum MessageTypeEnum {
-        text,
-        image,
-        news
+    public class MessageTypeEnum {
+        public const string text = "text";
+        public const string image = "image";
+        public const string news = "news";
+        public const string events = "event";
     }
 }
