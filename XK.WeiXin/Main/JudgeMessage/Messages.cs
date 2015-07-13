@@ -10,10 +10,10 @@ namespace XK.WeiXin.Main.JudgeMessage {
     public class Messages {
         private readonly Dictionary<string, Func<XmlDocument, string>> dicFuncMessage = new Dictionary<string, Func<XmlDocument, string>>();
         public Messages() {
-            dicFuncMessage.Add(MessageTypeEnum.text.ToString(), ResponseTextMsg);
-            dicFuncMessage.Add(MessageTypeEnum.image.ToString(), ResponseImageMsg);
+            dicFuncMessage.Add(MessageTypeEnum.text, ResponseTextMsg);
+            dicFuncMessage.Add(MessageTypeEnum.image, ResponseImageMsg);
 
-            dicFuncMessage.Add(MessageTypeEnum._event.ToString(), ResponseEventMsg);
+            dicFuncMessage.Add(MessageTypeEnum.events, ResponseEventMsg);
         }
 
         /// <summary>

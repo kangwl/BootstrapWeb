@@ -1,8 +1,8 @@
 ﻿namespace XK.WeiXin.Main.JudgeMessage {
-    public enum MessageTypeEnum {
-        text,
-        image,
-        news,
-        _event
+    public class MessageTypeEnum {
+        public const string text = "text";
+        public const string image = "image";
+        public const string news = "news";
+        public const string events = "event";
     }
 }
