@@ -72,7 +72,7 @@ namespace XK.WeiXin.Main.Logic {
             keywordFunc = keywordFuncs.FirstOrDefault(d => d.Key == Content.ToLower()).Value;
             if (keywordFunc == null) {
                 Log log=new Log();
-                log.WriteLog(XmlDoc.InnerText);
+                log.WriteLog("Event:"+XmlDoc.InnerText);
                 return "";
             }
             return keywordFunc();
@@ -97,6 +97,13 @@ namespace XK.WeiXin.Main.Logic {
             sb.Append("删除某个股票:删除股票600372\n");
             sb.Append("删除全部的股票:删除全部股票\n");
             sb.Append("自由查询股票:查询股票600372\n");
+
+            string ToUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//ToUserName");
+            string FromUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName");
+
+            string msg = string.Format(Text.sendXml, FromUserName, ToUserName,
+                TimeConvert.GetDateTimeStamp(DateTime.Now), ReturnText);
+
             return sb.ToString();
         }
     }

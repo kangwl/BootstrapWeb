@@ -142,7 +142,7 @@ namespace XK.WeiXin.Main.Logic {
         /// <summary>
         /// 发送给用户的消息格式
         /// </summary>
-        private string sendXml = @"<xml>
+        public  static  string sendXml = @"<xml>
                             <ToUserName><![CDATA[{0}]]></ToUserName>
                             <FromUserName><![CDATA[{1}]]></FromUserName>
                             <CreateTime>{2}</CreateTime>
