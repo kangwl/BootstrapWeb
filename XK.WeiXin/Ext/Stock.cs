@@ -72,6 +72,9 @@ namespace XK.WeiXin.Ext {
         }
 
         public string RemoveStock(string startWords) {
+            if (!File.Exists(JsonPath)) {
+                return "你还未添加股票";
+            }
             string[] arr = Content.Substring(startWords.Length).Trim().Split(',');
             StockModel stockModel = Common.json.JsonHelper<StockModel>.DeserializeFromFile(JsonPath);
             List<string> codes = stockModel.StockCodes;
@@ -90,6 +93,22 @@ namespace XK.WeiXin.Ext {
             return success ? "删除成功" : "删除失败";
         }
 
+        public string RemoveAllStock() {
+            if (!File.Exists(JsonPath)) {
+                return "你还未添加股票";
+            }
+            StockModel stockModel = Common.json.JsonHelper<StockModel>.DeserializeFromFile(JsonPath);
+            stockModel.StockCodes = new List<string>();
+            bool success = true;
+            try {
+                Common.json.JsonHelper<StockModel>.Serialize2File(stockModel, JsonPath);
+            }
+            catch (Exception) {
+                success = false;
+            }
+            return success ? "已删除全部股票" : "删除失败";
+        }
+
         private List<string> GetCodeList() {
             List<string> codeList = new List<string>();
             if (Directory.Exists(JsonPath1)) {
@@ -101,8 +120,11 @@ namespace XK.WeiXin.Ext {
         }
 
         public string GetStock(string startWords) {
+            if (!File.Exists(JsonPath)) {
+                return "你还未添加股票";
+            }
             string stocks = "";
-            Log log = new Log();
+           
             try {
 
                 List<string> codeList = GetCodeList();
@@ -110,8 +132,8 @@ namespace XK.WeiXin.Ext {
                 foreach (string code in codeList) {
                     string codeReq = GetCodeStr(code.Trim());
                     string reqUrl = string.Format(StockJS, codeReq);
-                    log.WriteLog(reqUrl);
-                    string stockStr = GetWebreq(reqUrl);
+                    
+                    string stockStr = GetWebreq(reqUrl);//请求stock
                     liststock.Add(code + stockStr);
                 }
 
@@ -119,7 +141,38 @@ namespace XK.WeiXin.Ext {
 
             }
             catch (Exception ex) {
-         
+                Log log = new Log();
+                log.WriteLog(ex.ToString());
+            }
+            return stocks;
+        }
+
+        public string SearchStock(string startWords) {
+
+            string stocks = "";
+            try {
+                string codes = Content.Substring(startWords.Length).Trim();
+                if (string.IsNullOrEmpty(codes)) {
+                    return "请在查询股票后面添加股票代码";
+                }
+                string[] arr = codes.Split(',');
+
+                List<string> codeList = arr.Select(code => code.Trim()).ToList();
+
+                List<string> liststock = new List<string>();
+                foreach (string code in codeList) {
+                    string codeReq = GetCodeStr(code.Trim());
+                    string reqUrl = string.Format(StockJS, codeReq);
+
+                    string stockStr = GetWebreq(reqUrl);//请求stock
+                    liststock.Add(code + stockStr);
+                }
+
+                stocks = string.Join("\n", liststock);
+
+            }
+            catch (Exception ex) {
+                Log log=new Log();
                 log.WriteLog(ex.ToString());
             }
             return stocks;
@@ -138,10 +191,11 @@ namespace XK.WeiXin.Ext {
             string xianjia = jo["items"]["10"].ToString();
             string zuigao = jo["items"]["8"].ToString();
             string name = jo["items"]["name"].ToString();//name
-                        float zhangjiaF = zhangjia.ToFloat();
-            float percentF = (zhangjiaF/jinkai.ToFloat())*100;
-            string percentStr = percentF.ToString() + "%";
-            string retStock = string.Format("-{4}\n 涨价：{0},今开：{1} \n 现价：{2},涨幅：{3}", zhangjia, jinkai, xianjia,percentStr, name);
+
+            float zhangjiaF = zhangjia.ToFloat();
+            string percentF = ((zhangjiaF/jinkai.ToFloat())*100).ToString("F");
+            string percentStr = percentF + "%";
+            string retStock = string.Format("-{4}\n 涨价：{0},今开：{1} \n 现价：{2},涨幅：{3}\n", zhangjia, jinkai, xianjia,percentStr, name);
 
             return retStock;
         }

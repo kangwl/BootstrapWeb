@@ -49,8 +49,10 @@ namespace XK.WeiXin.Main.Logic {
 
         private void AddKeyWordStartFunc() {
             keyWordStartFuncs.Add("添加股票", AddStock);
-            keyWordStartFuncs.Add("删除股票",RemoveStock);
             keyWordStartFuncs.Add("股票", GetStock);
+            keyWordStartFuncs.Add("删除股票",RemoveStock);
+            keyWordStartFuncs.Add("删除全部股票", RemoveAllStock);
+            keyWordStartFuncs.Add("查询股票", SearchStock);
 
         }
 
@@ -69,9 +71,21 @@ namespace XK.WeiXin.Main.Logic {
             return CreateSendMsg();
         }
 
+        private string RemoveAllStock() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            ReturnText = stock.RemoveStock("删除全部股票");
+            return CreateSendMsg();
+        }
+
         private string GetStock() {
             Ext.Stock stock = new Stock(XmlDoc);
             ReturnText = stock.GetStock("股票");
+            return CreateSendMsg();
+        }
+
+        private string SearchStock() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            ReturnText = stock.SearchStock("股票");
             return CreateSendMsg();
         }
         //#############################################################
