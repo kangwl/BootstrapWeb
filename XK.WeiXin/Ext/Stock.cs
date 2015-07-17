@@ -194,7 +194,7 @@ namespace XK.WeiXin.Ext {
             foreach (string s1 in rarr) {
                 var sArr = s1.Split(' ');
                 string code = sArr[0];
-                string name = sArr[1] + " " + sArr[2];
+                string name = sArr[1];
 
                 string outStr = "";
                 if (!string.IsNullOrEmpty(name)) {
