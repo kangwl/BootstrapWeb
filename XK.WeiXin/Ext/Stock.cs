@@ -188,7 +188,20 @@ namespace XK.WeiXin.Ext {
             var a = s.Substring(1);
             var aa = a.Substring(0, a.Length - 1);
             var r = (aa.Split(',')[0].TrimStart('[', '"').TrimEnd(']', '"'));
-            return r;
+            string outStr = "";
+            if (!string.IsNullOrEmpty(r)) {
+                string[] strlist = r.Replace("\\", "").Split('u');
+                try {
+                    for (int i = 1; i < strlist.Length; i++) {
+                        //将unicode字符转为10进制整数，然后转为char中文字符  
+                        outStr += (char)int.Parse(strlist[i], System.Globalization.NumberStyles.HexNumber);
+                    }
+                }
+                catch (FormatException ex) {
+                    outStr = ex.Message;
+                }
+            }
+            return outStr;
         }
 
         private string GetWebreq(string reqUrl) {
