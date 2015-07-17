@@ -178,6 +178,19 @@ namespace XK.WeiXin.Ext {
             return stocks;
         }
 
+        public string GetStockLike(string stocklike) {
+            string reqBase = "http://news.10jqka.com.cn/public/index_keyboard_{0}_stock,hk,usa_5_jsonp.html";
+            string reqUrl = string.Format(reqBase, stocklike);
+            Common.web.HttpWebHelper webHelper = new HttpWebHelper(reqUrl);
+            string res = webHelper.GetResponseStr(); 
+            int firstIndex = res.IndexOf('[');
+            string s = res.Substring(firstIndex).TrimEnd(')');
+            var a = s.Substring(1);
+            var aa = a.Substring(0, a.Length - 1);
+            var r = (aa.Split(',')[0].TrimStart('[', '"').TrimEnd(']', '"'));
+            return r;
+        }
+
         private string GetWebreq(string reqUrl) {
             Common.web.HttpWebHelper webHelper = new HttpWebHelper(reqUrl);
             string res = webHelper.GetResponseStr();

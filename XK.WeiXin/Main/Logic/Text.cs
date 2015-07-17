@@ -57,10 +57,16 @@ namespace XK.WeiXin.Main.Logic {
             keyWordStartFuncs.Add("删除全部股票", RemoveAllStock);
             keyWordStartFuncs.Add("查询股票", SearchStock);
             keyWordStartFuncs.Add("cxgp", SearchStock1);
+            keyWordStartFuncs.Add("dm", DMLike);
 
         }
 
-
+        //GetStockLike
+        private string DMLike() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            ReturnText = stock.GetStockLike("dm");
+            return CreateSendMsg();
+        }
         private string AddStock() {
            // Log log=new Log();
            // log.WriteLog("AddStock");
