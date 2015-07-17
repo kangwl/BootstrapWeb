@@ -86,7 +86,7 @@ namespace XK.WeiXin.Main.Logic {
 
         private string SearchStock() {
             Ext.Stock stock = new Stock(XmlDoc);
-            ReturnText = stock.SearchStock("股票");
+            ReturnText = stock.SearchStock("查询股票");
             return CreateSendMsg();
         }
         //#############################################################
@@ -107,7 +107,7 @@ namespace XK.WeiXin.Main.Logic {
 
         private string GetCommandList() {
             ReturnText = new Event(XmlDoc).CreateSendMsg();
-            return CreateSendMsg();
+            return ReturnText;
         }
 
 
