@@ -188,9 +188,11 @@ namespace XK.WeiXin.Ext {
             string s = res.Substring(firstIndex).TrimEnd(')');
             var a = s.Substring(1);
             var aa = a.Substring(0, a.Length - 1);
-            var r = (aa.Split(',')[0].TrimStart('[').TrimEnd(']'));
-            var rarr = r.Split(',');
-            List<string> stocks=new List<string>();
+            var aa1 = aa.Substring(1);
+            var aindex = aa1.IndexOf(']');
+            var aa2 = aa1.Substring(0, aindex);
+            var rarr = aa2.Split(',');
+            List<string> stocks = new List<string>();
             foreach (string s1 in rarr) {
                 var sArr = s1.Split(' ');
                 string code = sArr[0];
@@ -212,8 +214,8 @@ namespace XK.WeiXin.Ext {
                 stocks.Add(code + " " + outStr);
             }
 
-        
-           
+
+
             return string.Join("\n", stocks);
         }
 

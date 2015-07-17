@@ -43,15 +43,17 @@ namespace ConsoleAppTest {
             //Newtonsoft.Json.JsonReader reader=new JTokenReader();
 
             string reqBase = "http://news.10jqka.com.cn/public/index_keyboard_{0}_stock,hk,usa_5_jsonp.html";
-            string reqUrl = string.Format(reqBase, "zhdz");
+            string reqUrl = string.Format(reqBase, "zh");
             XK.Common.web.HttpWebHelper webHelper = new HttpWebHelper(reqUrl);
             string res = HttpUtility.UrlDecode(webHelper.GetResponseStr());
             int firstIndex = res.IndexOf('[');
             string s = res.Substring(firstIndex).TrimEnd(')');
             var a = s.Substring(1);
             var aa = a.Substring(0, a.Length - 1);
-            var r = (aa.Split(',')[0].TrimStart('[').TrimEnd(']'));
-            var rarr = r.Split(',');
+            var aa1 = aa.Substring(1);
+            var aindex = aa1.IndexOf(']');
+            var aa2 = aa1.Substring(0, aindex);
+            var rarr = aa2.Split(',');
             List<string> stocks = new List<string>();
             foreach (string s1 in rarr) {
                 var sArr = s1.Split(' ');
@@ -74,7 +76,7 @@ namespace ConsoleAppTest {
                 stocks.Add(code + " " + outStr);
             }
             Console.WriteLine(string.Join("\n", stocks));
-            Console.WriteLine("\u4e2d\u822a\u7535\u5b50"); 
+          //  Console.WriteLine("\u4e2d\u822a\u7535\u5b50"); 
             Console.Read();
         }
 
