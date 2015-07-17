@@ -179,8 +179,9 @@ namespace XK.WeiXin.Ext {
         }
 
         public string GetStockLike(string stocklike) {
+            string codes = Content.Substring(stocklike.Length).Trim();
             string reqBase = "http://news.10jqka.com.cn/public/index_keyboard_{0}_stock,hk,usa_5_jsonp.html";
-            string reqUrl = string.Format(reqBase, stocklike);
+            string reqUrl = string.Format(reqBase, codes);
             Common.web.HttpWebHelper webHelper = new HttpWebHelper(reqUrl);
             string res = webHelper.GetResponseStr(); 
             int firstIndex = res.IndexOf('[');
