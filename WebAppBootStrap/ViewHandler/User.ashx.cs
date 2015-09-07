@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Web;
+using Microsoft.Win32;
 
 namespace WebAppBootStrap.ViewHandler {
     /// <summary>
@@ -15,6 +18,13 @@ namespace WebAppBootStrap.ViewHandler {
             context.Response.End();
         }
 
+        private void CheckLogin() {
+            if (XK.Authentication.LoginLogic.HasLogin) {
+ 
+                 
+            }
+        }
+        
         private void DealRequest(HttpContext context) {
             XK.Core.ListJson.User usersJson = new XK.Core.ListJson.User(context.Request);
             string json = usersJson.GetDataJson();
@@ -27,4 +37,5 @@ namespace WebAppBootStrap.ViewHandler {
             }
         }
     }
+  
 }

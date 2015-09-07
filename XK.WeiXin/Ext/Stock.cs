@@ -185,6 +185,7 @@ namespace XK.WeiXin.Ext {
             string s = res.Substring(firstIndex).TrimEnd(')');
 
             JObject jo = (JObject) JsonConvert.DeserializeObject(s);
+            
             string zhangjia = jo["items"]["264648"].ToString();
             string zhuoshou = jo["items"]["6"].ToString();
             string jinkai = jo["items"]["7"].ToString();

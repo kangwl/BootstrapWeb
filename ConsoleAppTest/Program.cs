@@ -40,10 +40,64 @@ namespace ConsoleAppTest {
             //JObject jo = (JObject)JsonConvert.DeserializeObject(s);
             //string zone = jo["items"]["7"].ToString();
             //Newtonsoft.Json.JsonReader reader=new JTokenReader();
+
+            var role = "user";
+            var operation = new FileOper();
+            // 可以正常调用Read
+            
+            OperationInvoker.Invoke(operation, role, "Read", null);
+            // 但是不能调用Write
+            //OperationInvoker.Invoke(operation, role, "Write", null);
+
             Console.WriteLine("\u4e2d\u822a\u7535\u5b50");
             Console.Read();
         }
       
+    }
+
+    [AttributeUsage(AttributeTargets.Method)]
+    public class PowerAttribute : Attribute {
+        public string Role { get; set; }
+
+        public PowerAttribute(string role) {
+            Role = role;
+        }
+
+    }
+
+    public class FileOper {
+        [Power("user")]
+        public void Read() {
+
+        }
+        [Power("admin")]
+        public void Write() {
+
+        }
+    }
+
+    /// <summary>
+    /// 调用操作的工具类
+    /// </summary>
+    public static class OperationInvoker {
+        public static void Invoke(object target, string role, string operationName, object[] parameters) {
+            var targetType = target.GetType();
+            var methodInfo = targetType.GetMethod(operationName);
+
+            if (methodInfo.IsDefined(typeof(PowerAttribute), false)) {
+                // 读取出所有权限相关的标记
+                var permissons = methodInfo
+                    .GetCustomAttributes(typeof(PowerAttribute), false)
+                    .OfType<PowerAttribute>();
+                // 如果其中有满足的权限
+                if (permissons.Any(p => p.Role == role)) {
+                    methodInfo.Invoke(target, parameters);
+                }
+                else {
+                    throw new Exception(string.Format("角色{0}没有访问操作{1}的权限！", role, operationName));
+                }
+            }
+        }
     }
 
     public class TestM {
