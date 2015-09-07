@@ -50,19 +50,35 @@ namespace XK.WeiXin.Main.Logic {
 
         private void AddKeyWordStartFunc() {
             keyWordStartFuncs.Add("添加股票", AddStock);
+             keyWordStartFuncs.Add("tjgp", AddStock1);
             keyWordStartFuncs.Add("股票", GetStock);
+            keyWordStartFuncs.Add("gp", GetStock);
             keyWordStartFuncs.Add("删除股票",RemoveStock);
             keyWordStartFuncs.Add("删除全部股票", RemoveAllStock);
             keyWordStartFuncs.Add("查询股票", SearchStock);
+            keyWordStartFuncs.Add("cxgp", SearchStock1);
+            keyWordStartFuncs.Add("dm", DMLike);
 
         }
 
-
+        //GetStockLike
+        private string DMLike() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            ReturnText = stock.GetStockLike("dm");
+            return CreateSendMsg();
+        }
         private string AddStock() {
            // Log log=new Log();
            // log.WriteLog("AddStock");
             Ext.Stock stock = new Stock(XmlDoc);
             ReturnText = stock.SaveStock("添加股票");
+            return CreateSendMsg();
+        }
+        private string AddStock1() {
+            // Log log=new Log();
+            // log.WriteLog("AddStock");
+            Ext.Stock stock = new Stock(XmlDoc);
+            ReturnText = stock.SaveStock("tjgp");
             return CreateSendMsg();
         }
 
@@ -83,10 +99,20 @@ namespace XK.WeiXin.Main.Logic {
             ReturnText = stock.GetStock("股票");
             return CreateSendMsg();
         }
+        private string GetStock1() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            ReturnText = stock.GetStock("gp");
+            return CreateSendMsg();
+        }
 
         private string SearchStock() {
             Ext.Stock stock = new Stock(XmlDoc);
-            ReturnText = stock.SearchStock("股票");
+            ReturnText = stock.SearchStock("查询股票");
+            return CreateSendMsg();
+        }
+        private string SearchStock1() {
+            Ext.Stock stock = new Stock(XmlDoc);
+            ReturnText = stock.SearchStock("cxgp");
             return CreateSendMsg();
         }
         //#############################################################
@@ -107,7 +133,7 @@ namespace XK.WeiXin.Main.Logic {
 
         private string GetCommandList() {
             ReturnText = new Event(XmlDoc).CreateSendMsg();
-            return CreateSendMsg();
+            return ReturnText;
         }
 
 

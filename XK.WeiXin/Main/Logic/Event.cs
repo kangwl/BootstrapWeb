@@ -92,11 +92,11 @@ namespace XK.WeiXin.Main.Logic {
             StringBuilder sb = new StringBuilder();
             sb.Append("欢迎关注大侠我\n");
             sb.Append("指令如下:\n");
-            sb.Append("添加股票的指令：添加股票600372\n");
-            sb.Append("查询已添加的股票：股票\n");
+            sb.Append("添加股票的指令：添加股票/tjgp600372\n");
+            sb.Append("查询已添加的股票：股票/gp\n");
             sb.Append("删除某个股票:删除股票600372\n");
             sb.Append("删除全部的股票:删除全部股票\n");
-            sb.Append("自由查询股票:查询股票600372\n");
+            sb.Append("自由查询股票:查询股票/cxgp600372\n");
 
             string ToUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//ToUserName");
             string FromUserName = XmlHelper.GetXmlNodeTextByXpath(XmlDoc, "//FromUserName");

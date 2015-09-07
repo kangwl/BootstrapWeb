@@ -178,6 +178,47 @@ namespace XK.WeiXin.Ext {
             return stocks;
         }
 
+        public string GetStockLike(string stocklike) {
+            string codes = Content.Substring(stocklike.Length).Trim();
+            string reqBase = "http://news.10jqka.com.cn/public/index_keyboard_{0}_stock,hk,usa_5_jsonp.html";
+            string reqUrl = string.Format(reqBase, codes);
+            Common.web.HttpWebHelper webHelper = new HttpWebHelper(reqUrl);
+            string res = webHelper.GetResponseStr(); 
+            int firstIndex = res.IndexOf('[');
+            string s = res.Substring(firstIndex).TrimEnd(')');
+            var a = s.Substring(1);
+            var aa = a.Substring(0, a.Length - 1);
+            var aa1 = aa.Substring(1);
+            var aindex = aa1.IndexOf(']');
+            var aa2 = aa1.Substring(0, aindex);
+            var rarr = aa2.Split(',');
+            List<string> stocks = new List<string>();
+            foreach (string s1 in rarr) {
+                var sArr = s1.Split(' ');
+                string code = sArr[0];
+                string name = sArr[1];
+
+                string outStr = "";
+                if (!string.IsNullOrEmpty(name)) {
+                    string[] strlist = name.Replace("\\", "").Split('u');
+                    try {
+                        for (int i = 1; i < strlist.Length; i++) {
+                            //将unicode字符转为10进制整数，然后转为char中文字符  
+                            outStr += (char)int.Parse(strlist[i], System.Globalization.NumberStyles.HexNumber);
+                        }
+                    }
+                    catch (FormatException ex) {
+                        outStr = ex.Message;
+                    }
+                }
+                stocks.Add(code + " " + outStr);
+            }
+
+
+
+            return string.Join("\n", stocks);
+        }
+
         private string GetWebreq(string reqUrl) {
             Common.web.HttpWebHelper webHelper = new HttpWebHelper(reqUrl);
             string res = webHelper.GetResponseStr();
